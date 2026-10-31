@@ -1,0 +1,102 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HubContact Privacy Policy</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=IBM+Plex+Mono&display=swap"><style>
+:root{--bg:#f5f6f4;--fg:#181b1a;--muted:#5b625e;--line:#dde1dd;--accent:#2f5d50;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#111413;--fg:#e9ecea;--muted:#9ea7a2;--line:#262b29;--accent:#7cc4ad;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 'Familjen Grotesk',system-ui,sans-serif}
+main{max-width:72ch;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+a{color:var(--accent)}h1{font-size:2rem;line-height:1.15}h2{margin-top:2em;font-size:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.88em;overflow-wrap:anywhere}nav{font-size:.9rem;color:var(--muted);margin-bottom:24px}
+</style></head>
+<body><main><nav><a href="../hubcontact.html">← HubContact</a> · <a href="index.html">All privacy policies</a></nav><h1>HubContact Privacy Policy</h1>
+<p>Effective date: 31 October 2026</p>
+<p>HubContact ("the extension") is a Chrome extension for business teams, operated by <strong>TR1.eu (Ari Chazan), Barcelona, Spain</strong> ("we", "us"). Contact: <strong>support@itbcn.com</strong>. Product page: https://arichazan.github.io/apps/hubcontact.html</p>
+<p>This policy explains what the extension accesses, where that information goes, and what we do and do not do with it.</p>
+<h2>Summary</h2>
+<ul>
+<li><strong>Data flows only from your browser to HubSpot and Stripe.</strong> The extension talks to exactly two services, <code>api.hubapi.com</code> (HubSpot) and <code>api.stripe.com</code> (Stripe), using credentials that you or your company provide. Nothing is sent to us or to anyone else.</li>
+<li>We do not operate a server for this extension. We do not receive, collect, or store your data or your customers' data.</li>
+<li>No analytics, tracking, advertising, crash reporting or remote code.</li>
+<li>We do not sell data or use it for any purpose other than showing you the contact card and call links.</li>
+</ul>
+<h2>Roles (B2B)</h2>
+<p>HubContact is used by businesses to look up their own customers in their own HubSpot and Stripe accounts. For the personal data of those customers, <strong>your organisation is the controller</strong>. Because the extension runs entirely in your browser and we never receive the data, we do not act as a processor of it and no data processing agreement with us is needed for the extension as it works today. HubSpot and Stripe act under the agreements your organisation has with them.</p>
+<h2>Where the extension runs and what it reads</h2>
+<p>All reading happens locally in your browser.</p>
+<table>
+<thead>
+<tr>
+<th>Website</th>
+<th>What the extension reads on the page</th>
+<th>Sent anywhere?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gmail (<code>mail.google.com</code>)</td>
+<td>In the email thread you have open: the sender address, <code>mailto:</code>, <code>tel:</code> and WhatsApp links, and email addresses / phone numbers in the message text, to identify the correspondent.</td>
+<td>Only the chosen email address and/or phone number, to HubSpot (and the email to Stripe, if enabled).</td>
+</tr>
+<tr>
+<td>Bird / MessageBird Inbox (<code>inbox.messagebird.com</code>)</td>
+<td>In the conversation you have open: <code>mailto:</code> and <code>tel:</code> links and phone numbers in the text.</td>
+<td>Same as above.</td>
+</tr>
+<tr>
+<td>ActiveCampaign (<code>*.activehosted.com</code>)</td>
+<td>The email addresses in the contacts table.</td>
+<td>Each email address, to Stripe only (if a Stripe key is set), to link the matching Stripe customer.</td>
+</tr>
+<tr>
+<td>HubSpot app (<code>app.hubspot.com</code> and regional <code>app-*.hubspot.com</code> hosts)</td>
+<td>The values of phone number properties on records you open, to add a call link next to them.</td>
+<td><strong>Nothing.</strong> Click-to-call works entirely in the page; no request is made.</td>
+</tr>
+</tbody>
+</table>
+<p>The text of your emails and chats is never copied, stored or transmitted. Only the extracted identifier (an email address or phone number) is used.</p>
+<p>Clicking a call link hands the phone number to the calling app installed on your computer that handles the chosen link type (for example <code>callto:</code>, <code>tel:</code> or <code>zoiper:</code>). That app's own privacy terms apply.</p>
+<h2>Settings and credentials</h2>
+<p>You enter, on the extension's settings page:</p>
+<ul>
+<li>a HubSpot service key (or private app token) and your HubSpot portal ID;</li>
+<li>optionally, a Stripe restricted key;</li>
+<li>click-to-call preferences (on/off and the link type).</li>
+</ul>
+<p>These are saved in <code>chrome.storage.local</code> on your device. They are <strong>not</strong> synced through your Google account and are not sent to us. API keys are read only by the extension's background service worker and are sent only to the API they belong to (the HubSpot key to <code>api.hubapi.com</code>, the Stripe key to <code>api.stripe.com</code>), over HTTPS, in the <code>Authorization</code> header. They are never exposed to the web pages the extension runs on. They are stored unencrypted in the extension's storage area, protected by your operating-system account and Chrome profile, so use least-privilege keys (see "Security").</p>
+<h2>Data returned by HubSpot and Stripe</h2>
+<ul>
+<li><strong>HubSpot:</strong> the matching contact's name, email, phone, mobile phone, company, lifecycle stage and, when they exist in your portal, the custom properties Subscription Status, Spend and Cancellation Reason. To find these custom properties by label, the extension reads your contact property definitions (names and labels, not values).</li>
+<li><strong>Stripe:</strong> the customer ID, live/test mode, subscription status, cancellation date, and the plan/product names of active subscriptions.</li>
+</ul>
+<p>The extension requests only these fields. They are displayed in a card on the page you are viewing and nowhere else.</p>
+<h2>Retention</h2>
+<ul>
+<li>Settings stay in local extension storage until you clear them or uninstall the extension.</li>
+<li>Lookup results are kept in the memory of the extension's background process for up to 10 minutes (at most 500 entries) to avoid repeated requests. They are never written to disk and disappear when Chrome stops the background process.</li>
+<li>We keep nothing, because we never receive anything.</li>
+</ul>
+<h2>Your choices and deletion</h2>
+<ul>
+<li>Leave the Stripe key empty to turn off all Stripe requests (including ActiveCampaign lookups; the link then opens a Stripe dashboard search instead).</li>
+<li>Turn off "Show call links" to disable click-to-call.</li>
+<li>Clear the fields in the settings and save, or uninstall the extension, to delete all stored settings.</li>
+<li>Revoke or rotate your HubSpot and Stripe keys at any time in those services.</li>
+<li>Requests about your contacts' personal data (access, deletion) should go to your organisation, which controls that data in HubSpot and Stripe.</li>
+</ul>
+<h2>Security</h2>
+<ul>
+<li>All requests use HTTPS. The extension's host permissions are limited to <code>api.hubapi.com</code> and <code>api.stripe.com</code>.</li>
+<li>No remote code: all JavaScript ships inside the extension package.</li>
+<li>Use a HubSpot key with only the <code>crm.objects.contacts.read</code> scope and a Stripe <strong>restricted</strong> key with read-only access to Customers and Subscriptions (plus Products for plan names). Never use a Stripe secret key.</li>
+</ul>
+<h2>Third-party services</h2>
+<p>Your use of HubSpot and Stripe is governed by their terms and privacy policies (https://legal.hubspot.com/privacy-policy, https://stripe.com/privacy). HubContact is independent and is not affiliated with, endorsed by, or sponsored by HubSpot, Stripe, Google, Bird / MessageBird or ActiveCampaign.</p>
+<h2>Chrome Web Store User Data Policy</h2>
+<p>The use of information received by HubContact adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
+<h2>Children</h2>
+<p>HubContact is a business tool and is not directed to children.</p>
+<h2>Changes</h2>
+<p>If this policy changes, the updated version will be published at the same address with a new effective date. If a future version adds a server (for example the "Connect HubSpot" sign-in described in our roadmap), this policy will be updated before that version is released.</p>
+<h2>Contact</h2>
+<p>TR1.eu (Ari Chazan), Barcelona, Spain. support@itbcn.com</p></main></body></html>

@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TabLabler Privacy Policy</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=IBM+Plex+Mono&display=swap"><style>
+:root{--bg:#f5f6f4;--fg:#181b1a;--muted:#5b625e;--line:#dde1dd;--accent:#2f5d50;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#111413;--fg:#e9ecea;--muted:#9ea7a2;--line:#262b29;--accent:#7cc4ad;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 'Familjen Grotesk',system-ui,sans-serif}
+main{max-width:72ch;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+a{color:var(--accent)}h1{font-size:2rem;line-height:1.15}h2{margin-top:2em;font-size:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.88em;overflow-wrap:anywhere}nav{font-size:.9rem;color:var(--muted);margin-bottom:24px}
+</style></head>
+<body><main><nav><a href="../tablabler.html">← TabLabler</a> · <a href="index.html">All privacy policies</a></nav><h1>TabLabler Privacy Policy</h1>
+<p>Effective: 31 October 2026</p>
+<p>TabLabler is a Chrome extension operated by TR1.eu (Ari Chazan), Barcelona, Spain.
+Contact: support@itbcn.com</p>
+<h2>Summary</h2>
+<p>TabLabler does not collect, transmit, sell or share any data. Everything it stores stays in your
+browser on your device. It makes no network requests and contains no analytics, tracking or ads.</p>
+<h2>What is stored, and where</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Where</th>
+<th>How long</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The label, color and badge position you set for a tab</td>
+<td><code>chrome.storage.session</code> (in memory)</td>
+<td>Until the tab is closed or the browser quits</td>
+</tr>
+<tr>
+<td>Your URL rules (pattern, label, color)</td>
+<td><code>chrome.storage.local</code> on this device</td>
+<td>Until you delete the rule or remove the extension</td>
+</tr>
+<tr>
+<td>Your preferred badge color</td>
+<td><code>chrome.storage.local</code> on this device</td>
+<td>Until you reset it or remove the extension</td>
+</tr>
+</tbody>
+</table>
+<p>Nothing is stored in <code>chrome.storage.sync</code>, so nothing is synced through your Google account. (Versions
+before 1.0 kept the preferred color in sync storage; 1.0 moves it to local storage and deletes the
+synced copy.)</p>
+<h2>Page access</h2>
+<p>TabLabler starts with no access to websites. It changes a page only:</p>
+<ul>
+<li>when you click its toolbar icon on that tab (Chrome's temporary <code>activeTab</code> access), or</li>
+<li>on sites you granted for a URL rule, or for all sites if you turn that option on.</li>
+</ul>
+<p>On those pages it adds a badge element and puts your label at the start of the page title. To match
+rules it compares the page address with your patterns inside the browser. It does not read, record or
+send page content, form data, cookies or browsing history.</p>
+<h2>Third parties</h2>
+<p>None. TabLabler includes no third-party code, services or SDKs.</p>
+<h2>Children</h2>
+<p>TabLabler is a general-purpose developer tool and does not knowingly collect any information from anyone,
+including children.</p>
+<h2>Changes</h2>
+<p>If this policy changes, the new version will be published in this file and on
+https://arichazan.github.io/apps/tablabler.html with a new effective date.</p>
+<h2>Contact</h2>
+<p>Questions: support@itbcn.com</p></main></body></html>

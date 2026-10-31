@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EchoLingo Privacy Policy</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=IBM+Plex+Mono&display=swap"><style>
+:root{--bg:#f5f6f4;--fg:#181b1a;--muted:#5b625e;--line:#dde1dd;--accent:#2f5d50;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#111413;--fg:#e9ecea;--muted:#9ea7a2;--line:#262b29;--accent:#7cc4ad;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 'Familjen Grotesk',system-ui,sans-serif}
+main{max-width:72ch;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+a{color:var(--accent)}h1{font-size:2rem;line-height:1.15}h2{margin-top:2em;font-size:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.88em;overflow-wrap:anywhere}nav{font-size:.9rem;color:var(--muted);margin-bottom:24px}
+</style></head>
+<body><main><nav><a href="../echolingo.html">← EchoLingo</a> · <a href="index.html">All privacy policies</a></nav><h1>EchoLingo Privacy Policy</h1>
+<p><em>Last updated: 31 October 2026</em></p>
+<p>EchoLingo ("the app") is a podcast player for language learners. It is
+operated by <strong>TR1.eu (Ari Chazan), Barcelona, Spain</strong> ("we"). Contact:
+<strong>support@itbcn.com</strong>. Public page:
+<a href="https://arichazan.github.io/apps/echolingo.html">https://arichazan.github.io/apps/echolingo.html</a>.</p>
+<p>This policy covers the Android and iOS apps, the web app, and the EchoLingo
+clarification service (our server). We do not show ads, we do not sell data,
+and we do not use any analytics or tracking SDKs.</p>
+<h2>1. What leaves your device, and why</h2>
+<h3>When you ask "What did they just say?" (a clarification)</h3>
+<ul>
+<li><strong>A short podcast audio snippet</strong> (the last 5 to 15 seconds of the
+  episode you are playing, as set under Settings → Look back; 8 seconds by
+  default) and the episode's language code are sent to our server. Our
+  server passes the snippet on to our transcription provider (<strong>OpenAI</strong>)
+  to turn it into text. The snippet is cut from the podcast file that the
+  app downloaded. <strong>It is never recorded from your microphone.</strong></li>
+<li>In the web app, instead of a snippet, the app sends the <strong>public episode
+  audio URL and the start/end time</strong>. Our server downloads that public
+  file, cuts out the same short window, and sends only that window to
+  OpenAI.</li>
+<li><strong>Translations:</strong> when you pick a word or phrase, the selected text, the
+  surrounding transcript (at most 2,000 characters) and the two language
+  codes are sent to our server and on to OpenAI to produce a contextual
+  translation.</li>
+</ul>
+<h3>Access token and install id</h3>
+<p>So that the free daily allowance can be counted, the app creates a
+<strong>random install id</strong> (not derived from any hardware, advertising or
+account identifier). It sends that id to our server once and gets back an
+access token. Both are stored in your device's secure storage (Android
+Keystore / iOS Keychain) and the token is sent with each clarification.
+Reinstalling the app creates a new id.</p>
+<h3>Other services the app contacts directly</h3>
+<ul>
+<li><strong>Apple's podcast directory</strong> (<code>itunes.apple.com</code>) receives your podcast
+  search terms.</li>
+<li><strong>Podcast publishers and their hosting/CDN providers</strong> receive the
+  ordinary requests for RSS feeds, artwork and episode audio, as in any
+  podcast player. They see your IP address under their own policies.</li>
+<li><strong>Hugging Face</strong> (<code>huggingface.co</code>) serves the optional offline
+  transcription model, and <strong>GitHub</strong> (<code>raw.githubusercontent.com</code>) serves
+  the optional offline dictionaries. These are downloaded only when you
+  choose them in Settings → Offline mode.</li>
+<li><strong>Voice selection (optional, off by default):</strong> when you turn it on and
+  start voice selection during a clarification, the microphone is active
+  for at most about 7 seconds while you say the word you want. Recognition
+  is done by your phone's built-in speech recognition service (Google on
+  Android, Apple on iOS), which may process that audio on its servers under
+  Google's or Apple's privacy policy. We never receive your voice audio.</li>
+<li><strong>Read aloud</strong> uses your device's built-in text-to-speech.</li>
+</ul>
+<h2>2. What we retain, exactly</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Where</th>
+<th>How long</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Podcast audio snippet</td>
+<td>Server memory; temporary file while cutting (web)</td>
+<td><strong>Only while the request runs</strong> (seconds). Deleted when the request ends. Never written to logs or a database.</td>
+</tr>
+<tr>
+<td>Downloaded episode file (web app only)</td>
+<td>Server memory and a temporary directory</td>
+<td>Deleted when the request ends</td>
+</tr>
+<tr>
+<td>Transcript text, selected words, translations</td>
+<td>Passed through server memory</td>
+<td><strong>Not stored</strong> by us. Returned to your app only.</td>
+</tr>
+<tr>
+<td>Install id, daily clarification count</td>
+<td>Server database</td>
+<td>Count is kept for the current UTC day and deleted after it. The install id stays in the database while a count or entitlement exists for it.</td>
+</tr>
+<tr>
+<td>"Unlimited" entitlement flag (subscribers, testers)</td>
+<td>Server database</td>
+<td>Until the subscription ends or you ask us to delete it</td>
+</tr>
+<tr>
+<td>Request log line: time, endpoint, HTTP status, duration, byte or character count, pseudonymous identity (<code>dev:&lt;install id&gt;</code> or a one-way fingerprint of a tester token), request id</td>
+<td>Server logs at our host (Fly.io)</td>
+<td>Up to 30 days. No audio, transcript text, translations or IP addresses are written to our logs.</td>
+</tr>
+<tr>
+<td>IP address</td>
+<td>Server memory, for rate limiting</td>
+<td>At most 1 hour. Our hosting provider's network edge also processes it.</td>
+</tr>
+<tr>
+<td>Your library, playback positions, vocabulary, settings, cached episodes</td>
+<td><strong>On your device only</strong></td>
+<td>Until you delete them or uninstall the app</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OpenAI</strong> receives the audio snippets and text described above as our
+processor. Under OpenAI's API data-usage policy, API data is <strong>not used to
+train models</strong> and may be retained by OpenAI <strong>for up to 30 days</strong> for abuse
+and misuse monitoring, then deleted. OpenAI may process data in the United
+States. Transfers rely on OpenAI's Data Processing Addendum and Standard
+Contractual Clauses.</p>
+<p><strong>Fly.io</strong> (our host, servers in Madrid, Spain) processes requests and
+stores the logs and database described above as our processor.</p>
+<h2>3. Legal basis (GDPR)</h2>
+<ul>
+<li>Providing the features you ask for (clarification, translation, free
+  allowance): <strong>performance of a contract</strong> (Art. 6(1)(b)).</li>
+<li>Rate limiting, abuse prevention and service logs: <strong>legitimate
+  interests</strong> in keeping the service secure and available (Art. 6(1)(f)).</li>
+</ul>
+<h2>4. Purchases</h2>
+<p>If paid plans are offered, payment is handled entirely by Apple (App Store)
+or Google (Google Play). We never see your card details. We receive only an
+anonymous app-user id and whether your subscription is active, to switch
+the unlimited entitlement on or off.</p>
+<h2>5. Children</h2>
+<p>EchoLingo is not directed at children under 13 (under 14 in Spain) and we
+do not knowingly collect their data.</p>
+<h2>6. Your rights</h2>
+<p>You can request access, correction, deletion, restriction, portability or
+object to processing. Email <strong>support@itbcn.com</strong> and include your install
+id if you can, so we can find your daily counter or entitlement. Uninstalling
+the app deletes everything stored on your device. You may also complain to
+the Spanish data-protection authority (AEPD, <a href="https://www.aepd.es">https://www.aepd.es</a>).</p>
+<h2>7. Security</h2>
+<p>All traffic between the app and our server uses HTTPS. Your access token is
+kept in the operating system's secure storage. Server secrets are stored as
+platform secrets, never in the app.</p>
+<h2>8. Changes</h2>
+<p>We will update this page and the "Last updated" date when practices change.
+Material changes will also be announced in the app.</p></main></body></html>

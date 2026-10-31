@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Live Call Translator Privacy Policy</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=IBM+Plex+Mono&display=swap"><style>
+:root{--bg:#f5f6f4;--fg:#181b1a;--muted:#5b625e;--line:#dde1dd;--accent:#2f5d50;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#111413;--fg:#e9ecea;--muted:#9ea7a2;--line:#262b29;--accent:#7cc4ad;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 'Familjen Grotesk',system-ui,sans-serif}
+main{max-width:72ch;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+a{color:var(--accent)}h1{font-size:2rem;line-height:1.15}h2{margin-top:2em;font-size:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.88em;overflow-wrap:anywhere}nav{font-size:.9rem;color:var(--muted);margin-bottom:24px}
+</style></head>
+<body><main><nav><a href="../livecall.html">← Live Call Translator</a> · <a href="index.html">All privacy policies</a></nav><h1>Privacy Policy: Live Call Translator</h1>
+<p>Effective: 31 October 2026</p>
+<p>Operator: TR1.eu (Ari Chazan), Barcelona, Spain
+Contact: support@itbcn.com
+Product page: https://arichazan.github.io/apps/livecall.html</p>
+<p>This policy covers the Live Call Translator macOS app (<code>native/</code>) and the Python prototype (<code>app.py</code>).</p>
+<h2>Summary</h2>
+<ul>
+<li><strong>We do not run a server, and we receive no data from you.</strong> Live Call Translator has no account, analytics, telemetry, crash reporting or advertising.</li>
+<li><strong>With a cloud engine (OpenAI or Soniox), your call audio is streamed to that provider</strong> for translation while a call runs. This covers your microphone and the caller's voice. The connection uses your own API key and goes directly from your Mac to the provider.</li>
+<li><strong>Nothing is stored by us.</strong> Audio, transcripts and translations exist only in the app's memory while it runs. They are never written to disk by the app.</li>
+<li><strong>With an on-device engine (Apple on-device, or Sherpa + Bergamot), audio and text never leave your Mac.</strong></li>
+</ul>
+<h2>What is processed, and where</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Cloud engine (OpenAI / Soniox)</th>
+<th>On-device engine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Your microphone audio during a call</td>
+<td>Streamed to the selected provider</td>
+<td>Processed on your Mac only</td>
+</tr>
+<tr>
+<td>The caller's audio (captured from the call app or system audio)</td>
+<td>Streamed to the selected provider</td>
+<td>Processed on your Mac only</td>
+</tr>
+<tr>
+<td>Transcripts and translations</td>
+<td>Returned by the provider; shown in the window; kept in memory only</td>
+<td>Created on your Mac; kept in memory only</td>
+</tr>
+<tr>
+<td>Your API key</td>
+<td>Stored in your macOS Keychain on your Mac (native app), or kept in memory only (Python prototype). Sent only to the provider it belongs to, to authenticate.</td>
+<td>Not used</td>
+</tr>
+</tbody>
+</table>
+<p>While a cloud call runs, audio is streamed continuously, including silence and audio when muted (muting sends silence). Stop the call to stop streaming.</p>
+<p>The provider handles your audio under <strong>its own terms and privacy policy</strong> and under your account with it:
+- OpenAI: https://openai.com/policies/privacy-policy and https://openai.com/enterprise-privacy (API data usage)
+- Soniox: see the privacy policy linked from https://soniox.com</p>
+<p>We have no access to your provider account, your audio, or what the provider retains.</p>
+<h2>Other network connections</h2>
+<p>The app contacts other services only when you ask it to:
+- <strong>Local model download</strong> (Sherpa + Bergamot, Settings → Download required models): downloads model files from <code>github.com</code> (sherpa-onnx releases) and <code>data.statmt.org</code> (Bergamot). The app checks each file's SHA-256 checksum. No personal data is sent.
+- <strong>Apple on-device languages</strong>: macOS may download translation and dictation models from Apple. Apple's privacy policy applies.
+- <strong>BlackHole one-click install</strong>: reads the public Homebrew cask definition on <code>raw.githubusercontent.com</code> and downloads the signed BlackHole installer from <code>existential.audio</code>.</p>
+<h2>Permissions the app asks for</h2>
+<ul>
+<li><strong>Microphone</strong>: to translate your side of the call.</li>
+<li><strong>Screen Recording</strong> (ScreenCaptureKit mode) or <strong>System Audio Recording Only</strong> (Core Audio tap modes): to capture the caller's audio. Audio only. No screen images are processed or stored.</li>
+<li><strong>Speech Recognition</strong> (Apple on-device engine only): processed on the Mac (<code>requiresOnDeviceRecognition</code>).</li>
+</ul>
+<h2>Settings stored on your Mac</h2>
+<p>The app stores your language pair, engine choice, capture mode, device choices and the fact that you acknowledged the cloud notice in <code>~/Library/Preferences/com.ari.LiveCallTranslator.plist</code>. API keys are stored in the login Keychain. To remove everything, delete the app, that preferences file, <code>~/Library/Application Support/LiveCallTranslator</code> (downloaded models), and the "Live Call Translator API key" items in Keychain Access.</p>
+<h2>The other person on the call</h2>
+<p>The app translates another person's voice, and with a cloud engine that voice is sent to a third-party provider. <strong>Tell the other party that the call is being translated by a third-party service.</strong> In some jurisdictions you need their consent before you process or record their voice, and you are responsible for getting it. The app shows a notice to this effect before your first cloud call.</p>
+<h2>Children</h2>
+<p>The app is not directed at children under 16.</p>
+<h2>Your rights</h2>
+<p>Because we hold no personal data about you, there is nothing for us to access, correct or delete. For data held by OpenAI or Soniox, contact them or use their account tools. For any question, write to support@itbcn.com. You may also complain to the Spanish data protection authority (AEPD, https://www.aepd.es).</p>
+<h2>Changes</h2>
+<p>If this policy changes, we will update this file and the effective date above. If a change affects the in-app cloud notice, the app shows that notice again.</p></main></body></html>

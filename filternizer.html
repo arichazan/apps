@@ -112,7 +112,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </div></section>
 <section class="band"><div class="wrap">
   <h2>Under the hood</h2><p class="sub">Android app, Chrome extension and an optional Mac helper.</p>
-  <dl class="specs"><div><dt>Android</dt><dd>Kotlin, IMAP + OAuth2</dd></div><div><dt>Chrome</dt><dd>Manifest V3 side panel</dd></div><div><dt>Filter target</dt><dd>Gmail server-side filters</dd></div><div><dt>Passwords stored</dt><dd>None</dd></div></dl>
+  <dl class="specs"><div><dt>Android</dt><dd>Kotlin, Gmail API + OAuth2</dd></div><div><dt>Chrome</dt><dd>Manifest V3 side panel</dd></div><div><dt>Filter target</dt><dd>Gmail server-side filters</dd></div><div><dt>Passwords stored</dt><dd>None</dd></div></dl>
 </div></section>
 <section class="band"><div class="wrap">
   <h2>Made for</h2><p class="sub">People who receive more email than they read.</p>
@@ -131,7 +131,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div></div>
 </div></div></section>
 </main>
-<footer><div class="wrap"><span>Filternizer is made by TR1.eu in Barcelona.</span><span>Gmail is a trademark of Google LLC.</span></div></footer>
+<footer><div class="wrap"><span>Filternizer is made by TR1.eu in Barcelona. <a href="privacy/filternizer.html">Privacy policy</a></span><span>Gmail is a trademark of Google LLC.</span></div></footer>
 <script>
 document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
   const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};

@@ -106,7 +106,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </div></section>
 <section class="band"><div class="wrap">
   <h2>Small tool, fewer accidents</h2><p class="sub">It&#x27;s the browser version of a red sticker on the production server.</p>
-  <div class="feats"><div><h3>Survives reloads</h3><p>The label stays through refreshes and navigation within the same tab.</p></div><div><h3>Stays in its tab</h3><p>Closing or duplicating the tab clears the label, so it never leaks to other pages.</p></div><div><h3>Your color</h3><p>Set a preferred badge color once from the icon&#x27;s right-click menu.</p></div><div><h3>Title prefix</h3><p>Labels show in the tab strip, in the window switcher and in your history.</p></div><div><h3>No setup</h3><p>No account and no domain rules. Label the tab you&#x27;re on.</p></div><div><h3>Private</h3><p>Nothing is synced or sent anywhere. Labels live in the browser session.</p></div></div>
+  <div class="feats"><div><h3>Survives reloads</h3><p>The label stays through refreshes and navigation within the same tab.</p></div><div><h3>Stays in its tab</h3><p>Closing or duplicating the tab clears the label, so it never leaks to other pages.</p></div><div><h3>Your color</h3><p>Set a preferred badge color once from the icon&#x27;s right-click menu.</p></div><div><h3>Title prefix</h3><p>Labels show in the tab strip, in the window switcher and in your history.</p></div><div><h3>No setup</h3><p>No account needed. Label the tab you&#x27;re on, or add rules for the sites you use most.</p></div><div><h3>Private</h3><p>Nothing is synced or sent anywhere. Labels live in the browser session.</p></div></div>
 </div></section>
 <section class="band"><div class="wrap">
   <h2>Under the hood</h2><p class="sub">A very small Manifest V3 extension.</p>
@@ -118,7 +118,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </div></section>
 <section class="band"><div class="wrap">
   <h2>Questions</h2>
-  <div class="faq"><details><summary>Can it label tabs automatically by URL?</summary><p>Not yet. Automatic rules by domain are the most requested feature and are next on the list.</p></details><details><summary>Does it work in every frame?</summary><p>The badge shows in the top-level page and stays above the site&#x27;s own UI.</p></details><details><summary>Why does it need access to all sites?</summary><p>So you can label a tab on any domain you choose. It doesn&#x27;t read or send page content.</p></details></div>
+  <div class="faq"><details><summary>Can it label tabs automatically by URL?</summary><p>Yes. In Options, map a host or URL pattern to a label and color. Rules apply as you browse, and a label you set by hand always wins.</p></details><details><summary>Does it work in every frame?</summary><p>The badge shows in the top-level page and stays above the site&#x27;s own UI.</p></details><details><summary>Does it need access to all my sites?</summary><p>No. It works on the tab you click, and asks for access to specific sites only when you add a rule for them. It never reads or sends page content.</p></details></div>
 </div></section>
 <section class="band final" id="get"><div class="wrap"><div class="box">
   <div>
@@ -129,7 +129,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div></div>
 </div></div></section>
 </main>
-<footer><div class="wrap"><span>TabLabler is made by TR1.eu in Barcelona.</span><span>Free. No tracking.</span></div></footer>
+<footer><div class="wrap"><span>TabLabler is made by TR1.eu in Barcelona. <a href="privacy/tablabler.html">Privacy policy</a></span><span>Free. No tracking.</span></div></footer>
 <script>
 document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
   const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};

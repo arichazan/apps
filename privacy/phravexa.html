@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Phravexa Privacy Policy</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=IBM+Plex+Mono&display=swap"><style>
+:root{--bg:#f5f6f4;--fg:#181b1a;--muted:#5b625e;--line:#dde1dd;--accent:#2f5d50;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#111413;--fg:#e9ecea;--muted:#9ea7a2;--line:#262b29;--accent:#7cc4ad;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 'Familjen Grotesk',system-ui,sans-serif}
+main{max-width:72ch;margin:0 auto;padding:40px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+a{color:var(--accent)}h1{font-size:2rem;line-height:1.15}h2{margin-top:2em;font-size:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;display:block;overflow-x:auto}th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.88em;overflow-wrap:anywhere}nav{font-size:.9rem;color:var(--muted);margin-bottom:24px}
+</style></head>
+<body><main><nav><a href="../phravexa.html">← Phravexa</a> · <a href="index.html">All privacy policies</a></nav><h1>Phravexa Privacy Policy</h1>
+<p><strong>Last updated:</strong> 31 October 2026
+<strong>Applies to:</strong> the Phravexa Chrome extension (Chrome Web Store ID <code>kdcfdhofgpgajndceenbjoocapfmojke</code>), version 1.2.0 and later
+<strong>Operator:</strong> TR1.eu (Ari Chazan), Barcelona, Spain
+<strong>Contact:</strong> support@itbcn.com</p>
+<h2>Summary</h2>
+<ul>
+<li>Phravexa has no servers, no accounts, no analytics and no tracking. We (the operator) never receive your text, your API key or your settings.</li>
+<li>When you choose a language from the right-click menu, the text you selected is sent directly from your browser to the AI provider you configured (OpenAI, Anthropic or DeepSeek), using your own API key.</li>
+<li>Your API key stays on your device. Your other preferences may be synced between your own Chrome browsers by Google Chrome Sync.</li>
+</ul>
+<h2>What the extension handles</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>When</th>
+<th>Where it goes</th>
+<th>Kept for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Selected text</strong> (plain text, or the HTML markup of a selection on a web page so formatting can be kept)</td>
+<td>Only when you pick a language from the Phravexa right-click menu</td>
+<td>Sent over HTTPS to your chosen AI provider, together with the translation/rephrasing instructions</td>
+<td>Not stored by Phravexa. It exists in memory only while the request runs.</td>
+</tr>
+<tr>
+<td><strong>Translated / rephrased result</strong></td>
+<td>After the provider replies</td>
+<td>Written to your clipboard and shown briefly in a small popup on the page</td>
+<td>Not stored by Phravexa. It stays on your clipboard until you copy something else.</td>
+</tr>
+<tr>
+<td><strong>API key</strong> for OpenAI, Anthropic or DeepSeek</td>
+<td>When you save it on the settings page</td>
+<td>Stored in <code>chrome.storage.local</code> on this device only. Sent only to the matching provider, as the request's authentication header.</td>
+<td>Until you delete it in settings or remove the extension.</td>
+</tr>
+<tr>
+<td><strong>Preferences</strong>: chosen provider, optional model name, tone/special instructions, language list</td>
+<td>When you save settings</td>
+<td>Stored in <code>chrome.storage.sync</code>. If you use Chrome Sync, Google syncs them between browsers signed in to your Google account.</td>
+<td>Until you change them or remove the extension.</td>
+</tr>
+</tbody>
+</table>
+<p>Phravexa does not read pages you do not act on. It reads the current selection only at the moment you click a Phravexa menu item, using Chrome's <code>activeTab</code> permission.</p>
+<p>Phravexa does not collect browsing history, location, contacts, identifiers or usage statistics, and does not sell or transfer any data to third parties other than the AI provider you choose for the purpose described above.</p>
+<h2>AI providers</h2>
+<p>Text you send is processed by the provider under your own account with them and under their terms and privacy policy:</p>
+<ul>
+<li>OpenAI: https://openai.com/policies/privacy-policy</li>
+<li>Anthropic: https://www.anthropic.com/legal/privacy</li>
+<li>DeepSeek: https://www.deepseek.com/privacy (DeepSeek states that it stores data on servers in the People's Republic of China)</li>
+</ul>
+<p>Do not translate text that you are not allowed to share with your chosen provider.</p>
+<h2>Chrome Web Store User Data Policy</h2>
+<p>Phravexa's use of information complies with the <a href="https://developer.chrome.com/docs/webstore/program-policies/user-data-faq">Chrome Web Store User Data Policy</a>, including the Limited Use requirements. Data is used only to provide the translation and rephrasing feature you request, is not used for advertising, and is not read by humans at TR1.eu.</p>
+<h2>Your choices and rights</h2>
+<ul>
+<li>Delete your API key at any time by clearing the field on the settings page and saving, or by removing the extension (which deletes all of its stored data).</li>
+<li>Because we do not hold any of your data, we cannot access, export or delete it for you; it is under your control in your browser and with your AI provider. If you are in the EU/EEA you have rights under the GDPR, including the right to complain to a supervisory authority (in Spain, the AEPD, https://www.aepd.es). Questions: support@itbcn.com.</li>
+</ul>
+<h2>Children</h2>
+<p>Phravexa is not directed at children under 13 (or under 14 in Spain).</p>
+<h2>Changes</h2>
+<p>If this policy changes, the new version will be published at the same address with a new "Last updated" date. Material changes (for example a hosted, no-API-key plan) will be described in the extension's release notes before they take effect.</p></main></body></html>
