@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>EchoLingo Podcast Player</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="EchoLingo is a podcast player for language learners. Tap &#x27;What did they just say?&#x27; to pause, see a transcript and translation of the last few seconds, and save new words.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: a player card with the 'What did they just say?' moment frozen mid-tap */
+:root{--bg:#f1f6f5;--fg:#0f2a2c;--muted:#4b6366;--accent:#e2553a;--accent-ink:#bf3f27;--on-accent:#ffffff;--line:#d3e1df;--panel:#ffffff;--deep:#0f4c4f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1a1b;--fg:#e9f3f2;--muted:#9db6b6;--accent:#ff7d63;--accent-ink:#ff9a85;--on-accent:#0a1a1b;--line:#1d3536;--panel:#102526;--deep:#0b3a3c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a1a1b;--fg:#e9f3f2;--muted:#9db6b6;--accent:#ff7d63;--accent-ink:#ff9a85;--on-accent:#0a1a1b;--line:#1d3536;--panel:#102526;--deep:#0b3a3c;color-scheme:dark}
+:root{--display:'Young Serif',Georgia,serif;--body:'Karla',system-ui,sans-serif;--mono:'Space Mono',ui-monospace,monospace;--dw:400;--r:12px}
+
+:root{--gut:max(16px,env(safe-area-inset-left,0px));--gutr:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+header.top{padding-block:20px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.95rem}
+.platform{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+.hero{padding-block:40px 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.demo{overflow-x:clip;padding-block:8px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-family:var(--display);font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.02em;margin:.35em 0 .4em;text-wrap:balance;font-weight:var(--dw,700)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.btn{font:600 1rem var(--body);padding:13px 22px;border-radius:var(--r,10px);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--accent-ink);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:14px}
+.status b{color:var(--accent-ink);font-weight:600}
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 12px;text-wrap:balance;font-weight:var(--dw,700)}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:.85rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3,.feats h3{font-family:var(--display);font-size:1.15rem;margin:0;font-weight:var(--dw,700)}
+.steps p,.feats p{margin:0;color:var(--muted);font-size:.98rem}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feats>div{display:grid;gap:6px;align-content:start;padding-top:16px;border-top:2px solid var(--fg)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r,10px);overflow:hidden;background:var(--panel)}
+.specs div{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.specs dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.specs dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.who{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.who li{padding:8px 14px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:.95rem}
+.faq{display:grid;gap:0;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding-block:16px}
+.faq summary{font-weight:600;cursor:pointer;font-size:1.05rem}
+.faq p{color:var(--muted);margin:10px 0 0}
+.final{text-align:left}
+.final .box{background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r,10px)*1.6);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.final .box>*{min-width:0}
+.mailrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.mailrow code{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.copy{font:600 .9rem var(--body);padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+footer{padding-block:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.final .box{grid-template-columns:1fr;padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+.demo .player{background:var(--deep);color:#eaf6f5;border-radius:20px;padding:22px;display:grid;gap:16px}
+.demo .ep{display:flex;gap:14px;align-items:center}
+.demo .art{width:58px;height:58px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#f3b14a);flex:none}
+.demo .ep small{opacity:.7;display:block;font-size:.8rem}
+.demo .prog{height:5px;border-radius:3px;background:rgba(255,255,255,.2);position:relative}
+.demo .prog::after{content:"";position:absolute;inset:0 62% 0 0;background:#fff;border-radius:3px}
+.demo .ask{background:var(--accent);color:var(--on-accent);border-radius:99px;padding:12px;text-align:center;font-weight:700}
+.demo .tx{background:var(--panel);color:var(--fg);border-radius:14px;padding:16px;font-size:.95rem;display:grid;gap:6px}
+.demo .tx em{font-style:normal;background:color-mix(in srgb,var(--accent) 25%,transparent);border-radius:3px;padding:0 3px}
+.demo .tx small{color:var(--muted);font-family:var(--mono);font-size:.75rem}
+
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="mark" aria-hidden="true">?</span>EchoLingo</a>
+  <span class="platform">Android &amp; iOS</span>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">Podcasts for language learners</div>
+    <h1>“Wait… what did they just say?”</h1>
+    <p class="lede">Listen to real podcasts in the language you&#x27;re learning. When you miss something, one tap pauses the episode, shows what was said and its translation, and lets you save the words. Playback then resumes a little earlier so you hear it again.</p>
+    <div class="ctas"><a class="btn primary" href="#get">Join the testers</a><a class="btn ghost" href="#how">How it works</a></div>
+    <div class="status"><b>In development</b> · join the tester list</div>
+  </div>
+  <div class="demo" aria-hidden="true"><div class="player"><div class="ep"><div class="art"></div><div><b>Café com Português</b><small>Ep. 41 · 18:22 / 29:40</small></div></div><div class="prog"></div><div class="ask">⏸ What did they just say?</div>
+<div class="tx"><small>LAST 8 SECONDS</small><span>“A gente <em>tava morrendo de rir</em> o tempo todo.”</span><span style="color:var(--muted)">“We were dying of laughter the whole time.”</span><small>+ saved to vocabulary · rewinds 5 s on resume</small></div></div></div>
+</div></section>
+<section class="band" id="how"><div class="wrap">
+  <h2>Learn from the parts you missed</h2><p class="sub">Podcasts are great input until you miss a sentence. EchoLingo shows you exactly what you missed.</p>
+  <ol class="steps"><li><h3>Find a show</h3><p>Search the podcast directory or paste any RSS feed. Subscribe like in any other player.</p></li><li><h3>Listen normally</h3><p>Background audio, lock-screen controls and adjustable speed and skip intervals.</p></li><li><h3>Tap when you&#x27;re lost</h3><p>From the app, the notification or a headset button. You get the transcript and translation of the last few seconds.</p></li><li><h3>Keep the words</h3><p>Tap a word or phrase to save it. It goes into flashcards without duplicates.</p></li></ol>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>A real player with a study mode built in</h2><p class="sub">It works with the podcasts you already like, at whatever level you&#x27;re at.</p>
+  <div class="feats"><div><h3>Any podcast</h3><p>Apple directory search and direct RSS import, so you&#x27;re never limited to a catalog.</p></div><div><h3>Headset gesture</h3><p>Ask from your earbuds while you walk, cook or drive.</p></div><div><h3>Adjustable lookback</h3><p>Choose how far back to transcribe. Retry with more context if you need it.</p></div><div><h3>Rewind on resume</h3><p>Playback restarts a few seconds early so you hear the line again.</p></div><div><h3>Voice selection</h3><p>Say the word you want and EchoLingo finds it in the transcript.</p></div><div><h3>Flashcards</h3><p>Saved words become flashcards with spoken pronunciation.</p></div></div>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Under the hood</h2><p class="sub">A Flutter app with a small, rate-limited API for transcription and translation.</p>
+  <dl class="specs"><div><dt>App</dt><dd>Flutter · Android &amp; iOS</dd></div><div><dt>Audio</dt><dd>Background session + media keys</dd></div><div><dt>Backend</dt><dd>FastAPI, provider-agnostic</dd></div><div><dt>Microphone</dt><dd>Only when you ask</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Made for</h2><p class="sub">Intermediate learners who listen more than they study.</p>
+  <ul class="who"><li>Spanish learners</li><li>Portuguese learners</li><li>French learners</li><li>Commuters</li><li>Runners</li><li>Expats</li></ul>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq"><details><summary>Does it listen to my microphone?</summary><p>Only during a request you start yourself. Podcast audio comes from the episode file, never from the mic.</p></details><details><summary>Which languages?</summary><p>Any language the speech and translation services support. Spanish, French, Portuguese, German and Italian first.</p></details><details><summary>Will it cost money?</summary><p>Expect a free tier with a few look-ups a day and a subscription for unlimited use.</p></details></div>
+</div></section>
+<section class="band final" id="get"><div class="wrap"><div class="box">
+  <div>
+    <h2>Listen to native speakers without getting lost</h2>
+    <p class="sub" style="margin:0">We&#x27;re recruiting the first testers on Android and iOS. Tell us which language you&#x27;re learning:</p>
+    <div class="mailrow"><code>support@itbcn.com</code><button class="copy" type="button" data-copy="support@itbcn.com">Copy</button></div>
+  </div>
+  <div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>EchoLingo is made by TR1.eu in Barcelona.</span><span>Podcast audio is streamed from each show's own feed.</span></div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}
+}));
+function sel(b){const c=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press ⌘C / Ctrl+C'}
+</script>
+
+</body>
+</html>

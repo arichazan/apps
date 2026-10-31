@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>AlefBet Hebrew Games</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="AlefBet! is a playful Android app for learning Hebrew letters and words, plus a 5,600-item English course and French. Works fully offline.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;700&family=Rubik+Mono+One&display=swap">
+<style>
+/* Layout: toy-box: chunky flip cards with Hebrew glyphs; XP and streak chips */
+:root{--bg:#fff8ef;--fg:#23204a;--muted:#5e5a86;--accent:#5b4cf0;--accent-ink:#4537d6;--on-accent:#ffffff;--line:#efe3d2;--panel:#ffffff;--sun:#ffb627;--mint:#2ec4a6;--rose:#ff5d8f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17152e;--fg:#f5f2ff;--muted:#b4afd6;--accent:#9d93ff;--accent-ink:#b6aeff;--on-accent:#17152e;--line:#2d2a52;--panel:#201d3d;--sun:#ffc44d;--mint:#47d8bb;--rose:#ff7aa3;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17152e;--fg:#f5f2ff;--muted:#b4afd6;--accent:#9d93ff;--accent-ink:#b6aeff;--on-accent:#17152e;--line:#2d2a52;--panel:#201d3d;--sun:#ffc44d;--mint:#47d8bb;--rose:#ff7aa3;color-scheme:dark}
+:root{--display:'Fredoka','Rubik',system-ui,sans-serif;--body:'Rubik',system-ui,sans-serif;--mono:'Rubik',system-ui,sans-serif;--r:16px;--dw:700}
+
+:root{--gut:max(16px,env(safe-area-inset-left,0px));--gutr:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+header.top{padding-block:20px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.95rem}
+.platform{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+.hero{padding-block:40px 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.demo{overflow-x:clip;padding-block:8px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-family:var(--display);font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.02em;margin:.35em 0 .4em;text-wrap:balance;font-weight:var(--dw,700)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.btn{font:600 1rem var(--body);padding:13px 22px;border-radius:var(--r,10px);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--accent-ink);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:14px}
+.status b{color:var(--accent-ink);font-weight:600}
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 12px;text-wrap:balance;font-weight:var(--dw,700)}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:.85rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3,.feats h3{font-family:var(--display);font-size:1.15rem;margin:0;font-weight:var(--dw,700)}
+.steps p,.feats p{margin:0;color:var(--muted);font-size:.98rem}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feats>div{display:grid;gap:6px;align-content:start;padding-top:16px;border-top:2px solid var(--fg)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r,10px);overflow:hidden;background:var(--panel)}
+.specs div{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.specs dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.specs dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.who{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.who li{padding:8px 14px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:.95rem}
+.faq{display:grid;gap:0;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding-block:16px}
+.faq summary{font-weight:600;cursor:pointer;font-size:1.05rem}
+.faq p{color:var(--muted);margin:10px 0 0}
+.final{text-align:left}
+.final .box{background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r,10px)*1.6);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.final .box>*{min-width:0}
+.mailrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.mailrow code{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.copy{font:600 .9rem var(--body);padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+footer{padding-block:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.final .box{grid-template-columns:1fr;padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+.demo .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.demo .card{aspect-ratio:3/4;border-radius:18px;background:var(--panel);border:2px solid var(--line);display:grid;place-items:center;align-content:center;gap:4px;box-shadow:0 6px 0 var(--line)}
+.demo .card b{font-family:'Rubik',sans-serif;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;color:var(--fg)}
+.demo .card small{font-size:.8rem;color:var(--muted)}
+.demo .card:nth-child(1){transform:rotate(-4deg);border-color:var(--sun)}
+.demo .card:nth-child(2){transform:translateY(-10px);border-color:var(--accent)}
+.demo .card:nth-child(3){transform:rotate(4deg);border-color:var(--mint)}
+.demo .chips{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.demo .chips span{padding:7px 14px;border-radius:99px;font-weight:600;font-size:.9rem;background:var(--panel);border:2px solid var(--line)}
+
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="mark" aria-hidden="true">א</span>AlefBet!</a>
+  <span class="platform">Android</span>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">Learn Hebrew by playing</div>
+    <h1>From your first <span style="color:var(--accent)">alef</span> to street slang.</h1>
+    <p class="lede">Flip cards for all 22 Hebrew letters, quick-fire word quizzes and a memory game. You earn XP and keep a daily streak. It works offline, with English and French courses included.</p>
+    <div class="ctas"><a class="btn primary" href="#get">Get early access</a><a class="btn ghost" href="#how">How it works</a></div>
+    <div class="status"><b>Coming to Google Play</b> · Android 8.0+</div>
+  </div>
+  <div class="demo" aria-hidden="true"><div class="cards"><div class="card"><b>א</b><small>Alef · silent</small></div><div class="card"><b>ב</b><small>Bet · “b”</small></div><div class="card"><b>שָׁלוֹם</b><small>shalom 🕊️</small></div></div>
+<div class="chips"><span>🔥 12-day streak</span><span>⭐ Level 7 · 640 XP</span><span>🎯 Combo ×3</span></div></div>
+</div></section>
+<section class="band" id="how"><div class="wrap">
+  <h2>Short daily games</h2><p class="sub">Each round takes a couple of minutes, which is enough to keep your streak going.</p>
+  <ol class="steps"><li><h3>Letter Safari</h3><p>Flip-card flashcards for all 22 letters, with the sound, the final form and a silly mnemonic for each.</p></li><li><h3>Word Blitz</h3><p>Ten-question quizzes across greetings, food, animals, numbers and family. Correct answers in a row build combo multipliers.</p></li><li><h3>Memory Match</h3><p>Pair Hebrew words with their meanings. Fewer moves means a better score.</p></li></ol>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Three courses in one app</h2><p class="sub">Hebrew is the main course. English and French use the same games.</p>
+  <div class="feats"><div><h3>Spoken Hebrew</h3><p>Hear every letter and word read aloud by your phone&#x27;s Hebrew voice.</p></div><div><h3>Huge English course</h3><p>5,600 items: 5,584 vocabulary cards with definitions and examples, plus idioms.</p></div><div><h3>French B1–B2</h3><p>Everyday vocabulary and idioms for intermediate learners.</p></div><div><h3>Fully offline</h3><p>All content is built into the app, so it works on a plane or with no data plan.</p></div><div><h3>New words without updates</h3><p>Fresh vocabulary and categories arrive automatically, without an app update.</p></div><div><h3>English or Spanish interface</h3><p>Menus and answers are available in English or Spanish.</p></div></div>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Under the hood</h2><p class="sub">A native Android app with no accounts and no sign-up.</p>
+  <dl class="specs"><div><dt>Built with</dt><dd>Kotlin + Jetpack Compose</dd></div><div><dt>Requires</dt><dd>Android 8.0 (API 26)+</dd></div><div><dt>Content</dt><dd>Hebrew · English · French</dd></div><div><dt>Account</dt><dd>Not needed</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Made for</h2><p class="sub">Beginners of all ages.</p>
+  <ul class="who"><li>Kids starting Hebrew school</li><li>Bar &amp; bat mitzvah prep</li><li>Olim and travellers to Israel</li><li>Parents learning with kids</li><li>Spanish speakers learning English</li></ul>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq"><details><summary>Is it free?</summary><p>The first release is free to download.</p></details><details><summary>Do I need to know the alphabet first?</summary><p>No. Letter Safari starts with alef.</p></details><details><summary>Why is there no sound?</summary><p>Speech uses your phone&#x27;s built-in Hebrew text-to-speech voice. Install one in Android settings if you don&#x27;t hear anything.</p></details></div>
+</div></section>
+<section class="band final" id="get"><div class="wrap"><div class="box">
+  <div>
+    <h2>Start with alef today</h2>
+    <p class="sub" style="margin:0">AlefBet! is coming to Google Play. Email us to join the early-access testers.</p>
+    <div class="mailrow"><code>support@itbcn.com</code><button class="copy" type="button" data-copy="support@itbcn.com">Copy</button></div>
+  </div>
+  <div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>AlefBet! is made by TR1.eu in Barcelona.</span><span>No accounts. Works offline.</span></div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}
+}));
+function sel(b){const c=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press ⌘C / Ctrl+C'}
+</script>
+
+</body>
+</html>

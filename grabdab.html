@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>GrabDab for Mac</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="GrabDab copies text from anywhere on your Mac screen. Press ⌘⇧2, drag over text, images, video or a QR code, and paste.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&family=Fira+Code:wght@400;500&display=swap">
+<style>
+/* Layout: a dashed selection marquee over 'uncopyable' text is the hero */
+:root{--bg:#fbfbfd;--fg:#161a22;--muted:#5a6170;--accent:#0a7cff;--accent-ink:#0062d1;--on-accent:#ffffff;--line:#e1e4ea;--panel:#ffffff;--key:#eef1f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101318;--fg:#eef1f6;--muted:#a2a9b7;--accent:#4ea2ff;--accent-ink:#7ab9ff;--on-accent:#101318;--line:#262b35;--panel:#171b22;--key:#222833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101318;--fg:#eef1f6;--muted:#a2a9b7;--accent:#4ea2ff;--accent-ink:#7ab9ff;--on-accent:#101318;--line:#262b35;--panel:#171b22;--key:#222833;color-scheme:dark}
+:root{--display:'Sora',system-ui,sans-serif;--body:'Nunito Sans',system-ui,sans-serif;--mono:'Fira Code',ui-monospace,monospace;}
+
+:root{--gut:max(16px,env(safe-area-inset-left,0px));--gutr:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+header.top{padding-block:20px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.95rem}
+.platform{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+.hero{padding-block:40px 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.demo{overflow-x:clip;padding-block:8px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-family:var(--display);font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.02em;margin:.35em 0 .4em;text-wrap:balance;font-weight:var(--dw,700)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.btn{font:600 1rem var(--body);padding:13px 22px;border-radius:var(--r,10px);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--accent-ink);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:14px}
+.status b{color:var(--accent-ink);font-weight:600}
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 12px;text-wrap:balance;font-weight:var(--dw,700)}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:.85rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3,.feats h3{font-family:var(--display);font-size:1.15rem;margin:0;font-weight:var(--dw,700)}
+.steps p,.feats p{margin:0;color:var(--muted);font-size:.98rem}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feats>div{display:grid;gap:6px;align-content:start;padding-top:16px;border-top:2px solid var(--fg)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r,10px);overflow:hidden;background:var(--panel)}
+.specs div{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.specs dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.specs dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.who{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.who li{padding:8px 14px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:.95rem}
+.faq{display:grid;gap:0;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding-block:16px}
+.faq summary{font-weight:600;cursor:pointer;font-size:1.05rem}
+.faq p{color:var(--muted);margin:10px 0 0}
+.final{text-align:left}
+.final .box{background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r,10px)*1.6);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.final .box>*{min-width:0}
+.mailrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.mailrow code{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.copy{font:600 .9rem var(--body);padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+footer{padding-block:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.final .box{grid-template-columns:1fr;padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+.demo .shot{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative}
+.demo .img{border-radius:8px;background:#2a2f3a;color:#d9dde6;padding:20px;font-family:var(--mono);font-size:.85rem;line-height:1.7}
+.demo .marq{position:absolute;left:30px;right:56px;top:56px;height:62px;border:2px dashed var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);border-radius:3px}
+.demo .keys{display:flex;gap:6px;margin-top:16px;align-items:center;font-size:.9rem;color:var(--muted);flex-wrap:wrap}
+.demo kbd{font-family:var(--mono);background:var(--key);border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:3px 9px;color:var(--fg)}
+.demo .toast{position:absolute;right:16px;bottom:-18px;background:var(--fg);color:var(--bg);font-size:.85rem;padding:8px 14px;border-radius:99px}
+
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="mark" aria-hidden="true">T</span>GrabDab</a>
+  <span class="platform">macOS menu bar</span>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">On-screen text grabber</div>
+    <h1>If you can see it, you can <span style="color:var(--accent)">copy it.</span></h1>
+    <p class="lede">Press ⌘⇧2 and drag over any text on your screen: a screenshot, a video frame, a locked PDF or an error dialog. GrabDab reads it on your Mac and puts it on your clipboard.</p>
+    <div class="ctas"><a class="btn primary" href="#get">Get launch access</a><a class="btn ghost" href="#how">How it works</a></div>
+    <div class="status"><b>Coming to the Mac App Store</b></div>
+  </div>
+  <div class="demo" aria-hidden="true"><div class="shot"><div class="img">Error 0x8007045D<br>The request could not be performed<br>because of an I/O device error.<br><span style="opacity:.5">[ OK ]</span></div><div class="marq"></div><div class="toast">Copied to clipboard</div></div>
+<div class="keys"><kbd>⌘</kbd><kbd>⇧</kbd><kbd>2</kbd><span>then drag</span></div></div>
+</div></section>
+<section class="band" id="how"><div class="wrap">
+  <h2>One shortcut</h2><p class="sub">GrabDab lives in the menu bar and has no Dock icon or window to manage.</p>
+  <ol class="steps"><li><h3>Press ⌘⇧2</h3><p>A light overlay covers the screen. Change the shortcut in Preferences.</p></li><li><h3>Drag over the text</h3><p>Select any area. Press Escape or right-click to cancel.</p></li><li><h3>Paste</h3><p>The text is already on your clipboard, with line breaks kept.</p></li></ol>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Fast and private</h2><p class="sub">Recognition runs on your Mac with Apple&#x27;s Vision framework, typically in under two seconds.</p>
+  <div class="feats"><div><h3>Works on anything visible</h3><p>Images, videos, screen shares, scanned PDFs, apps that block copying.</p></div><div><h3>QR codes and barcodes</h3><p>Use the same gesture on a QR code or barcode to copy its contents.</p></div><div><h3>Nothing leaves your Mac</h3><p>No cloud OCR, no account and no network calls.</p></div><div><h3>Keeps line breaks</h3><p>Multi-line text, addresses and code snippets paste with their original layout.</p></div><div><h3>Your shortcut</h3><p>Remap the hotkey, turn the confirmation toast on or off, and launch at login.</p></div><div><h3>Lightweight</h3><p>A small native Swift app that stays idle until you press the shortcut.</p></div></div>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Under the hood</h2><p class="sub">A native Swift and SwiftUI app.</p>
+  <dl class="specs"><div><dt>OCR engine</dt><dd>Apple Vision (on-device)</dd></div><div><dt>Speed target</dt><dd>&lt; 2 s for 1080p</dd></div><div><dt>Default hotkey</dt><dd>⌘⇧2</dd></div><div><dt>Requires</dt><dd>macOS 14+</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Made for</h2><p class="sub">Anyone who has ever retyped text from a screenshot.</p>
+  <ul class="who"><li>Developers copying errors</li><li>Researchers</li><li>Designers</li><li>Students in online lectures</li><li>Accountants with scanned PDFs</li><li>Translators</li></ul>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq"><details><summary>Why does it need Screen Recording permission?</summary><p>macOS requires that permission for any app that reads pixels on screen. GrabDab only captures the area you select.</p></details><details><summary>Which languages are supported?</summary><p>English in the first release. More Vision languages will follow.</p></details><details><summary>Does it work offline?</summary><p>Yes. Everything runs on your Mac.</p></details></div>
+</div></section>
+<section class="band final" id="get"><div class="wrap"><div class="box">
+  <div>
+    <h2>Stop retyping screenshots</h2>
+    <p class="sub" style="margin:0">GrabDab is going through Mac App Store review. Email us to hear when it&#x27;s available.</p>
+    <div class="mailrow"><code>support@itbcn.com</code><button class="copy" type="button" data-copy="support@itbcn.com">Copy</button></div>
+  </div>
+  <div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>GrabDab is made by TR1.eu in Barcelona.</span><span>On-device OCR. No network calls.</span></div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}
+}));
+function sel(b){const c=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press ⌘C / Ctrl+C'}
+</script>
+
+</body>
+</html>

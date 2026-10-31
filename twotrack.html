@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>TwoTrack for Mac</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="TwoTrack records both sides of any Zoom, Meet or Teams call on your Mac, as separate tracks and a mix, without a virtual audio driver.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500;62..125,700;62..125,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: studio console: two colored meter lanes are the hero; condensed-width headings */
+:root{--bg:#f3f5f6;--fg:#0f1d24;--muted:#4f5f68;--accent:#0e8f86;--accent-ink:#0b7169;--on-accent:#ffffff;--line:#d6dde0;--panel:#ffffff;--sys:#e08a1e;--mic:#0e8f86}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1418;--fg:#e8f1f3;--muted:#9bb0b8;--accent:#3cc7bc;--accent-ink:#5fd8ce;--on-accent:#0b1418;--line:#1f3038;--panel:#111e24;--sys:#f2a542;--mic:#3cc7bc;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1418;--fg:#e8f1f3;--muted:#9bb0b8;--accent:#3cc7bc;--accent-ink:#5fd8ce;--on-accent:#0b1418;--line:#1f3038;--panel:#111e24;--sys:#f2a542;--mic:#3cc7bc;color-scheme:dark}
+:root{--display:'Archivo',system-ui,sans-serif;--body:'Archivo',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--dw:800}
+
+:root{--gut:max(16px,env(safe-area-inset-left,0px));--gutr:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+header.top{padding-block:20px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.95rem}
+.platform{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+.hero{padding-block:40px 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.demo{overflow-x:clip;padding-block:8px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-family:var(--display);font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.02em;margin:.35em 0 .4em;text-wrap:balance;font-weight:var(--dw,700)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.btn{font:600 1rem var(--body);padding:13px 22px;border-radius:var(--r,10px);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--accent-ink);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:14px}
+.status b{color:var(--accent-ink);font-weight:600}
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 12px;text-wrap:balance;font-weight:var(--dw,700)}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:.85rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3,.feats h3{font-family:var(--display);font-size:1.15rem;margin:0;font-weight:var(--dw,700)}
+.steps p,.feats p{margin:0;color:var(--muted);font-size:.98rem}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feats>div{display:grid;gap:6px;align-content:start;padding-top:16px;border-top:2px solid var(--fg)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r,10px);overflow:hidden;background:var(--panel)}
+.specs div{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.specs dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.specs dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.who{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.who li{padding:8px 14px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:.95rem}
+.faq{display:grid;gap:0;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding-block:16px}
+.faq summary{font-weight:600;cursor:pointer;font-size:1.05rem}
+.faq p{color:var(--muted);margin:10px 0 0}
+.final{text-align:left}
+.final .box{background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r,10px)*1.6);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.final .box>*{min-width:0}
+.mailrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.mailrow code{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.copy{font:600 .9rem var(--body);padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+footer{padding-block:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.final .box{grid-template-columns:1fr;padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+.demo .console{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:16px}
+.demo .row{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center;font-family:var(--mono);font-size:.82rem}
+.demo .row>*{min-width:0}
+.demo .wave{height:46px;display:flex;align-items:center;gap:3px;overflow:hidden}
+.demo .wave i{flex:1;border-radius:2px;min-width:2px}
+.demo .sys i{background:var(--sys)}.demo .mic i{background:var(--mic)}
+.demo .foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;flex-wrap:wrap;gap:8px}
+.demo .files{margin-top:14px;font-family:var(--mono);font-size:.8rem;color:var(--muted);line-height:1.8}
+
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="mark" aria-hidden="true">⏺</span>TwoTrack</a>
+  <span class="platform">macOS 14+ menu bar</span>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">Meeting recorder for Mac</div>
+    <h1><span style="font-stretch:80%">Both sides of the call.</span><br><span style="font-stretch:112%;color:var(--accent)">Two clean tracks.</span></h1>
+    <p class="lede">TwoTrack sits in your menu bar and records the meeting audio from your Mac and your microphone at the same time. It works with Zoom, Google Meet, Teams or any browser call, and you never set up a virtual audio device.</p>
+    <div class="ctas"><a class="btn primary" href="#get">Join the beta</a><a class="btn ghost" href="#how">How it works</a></div>
+    <div class="status"><b>In private beta</b> · macOS 14 Sonoma or later</div>
+  </div>
+  <div class="demo" aria-hidden="true"><div class="console"><div class="row"><span>MAC AUDIO</span><div class="wave sys"><i style="height:30%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:90%"></i><i style="height:50%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:60%"></i><i style="height:30%"></i><i style="height:75%"></i><i style="height:95%"></i><i style="height:55%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:80%"></i><i style="height:50%"></i><i style="height:35%"></i><i style="height:60%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:70%"></i><i style="height:30%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:60%"></i><i style="height:40%"></i></div></div>
+<div class="row"><span>MICROPHONE</span><div class="wave mic"><i style="height:10%"></i><i style="height:15%"></i><i style="height:60%"></i><i style="height:85%"></i><i style="height:70%"></i><i style="height:20%"></i><i style="height:10%"></i><i style="height:8%"></i><i style="height:12%"></i><i style="height:50%"></i><i style="height:75%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:10%"></i><i style="height:8%"></i><i style="height:10%"></i><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:15%"></i><i style="height:10%"></i><i style="height:8%"></i><i style="height:60%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:12%"></i><i style="height:8%"></i><i style="height:10%"></i><i style="height:20%"></i></div></div>
+<div class="foot"><span>● REC 00:32:08</span><span>48 kHz · 2.1 GB free ≈ 9 h</span></div></div>
+<div class="files">~/Movies/TwoTrack/Client kickoff/<br>&nbsp;&nbsp;System Audio.m4a · Microphone.m4a · Meeting Mix.m4a</div></div>
+</div></section>
+<section class="band" id="how"><div class="wrap">
+  <h2>Set it up once, then forget it</h2><p class="sub">First-run setup takes about a minute. After that, recording is one click in the menu bar.</p>
+  <ol class="steps"><li><h3>Grant two permissions</h3><p>Microphone, plus Screen &amp; System Audio Recording. TwoTrack checks both before your first call.</p></li><li><h3>Watch both meters move</h3><p>Speak and play some audio to confirm both sources are working before the meeting starts.</p></li><li><h3>Click Record</h3><p>Use any meeting app. Switch from Zoom to Meet halfway through and the recording keeps going.</p></li><li><h3>Open the folder</h3><p>You get your voice, the other side and a mix as separate files, ready for transcription.</p></li></ol>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Recordings you can rely on</h2><p class="sub">Most Mac recorders depend on fragile audio routing. TwoTrack uses Apple&#x27;s ScreenCaptureKit instead.</p>
+  <div class="feats"><div><h3>No virtual driver</h3><p>No BlackHole and no fake speaker in your sound settings. Your normal audio setup stays as it is.</p></div><div><h3>Separate tracks</h3><p>Your mic and the remote side are saved as separate files, which makes transcription and editing much easier.</p></div><div><h3>Crash-safe</h3><p>If your Mac restarts mid-call, TwoTrack rebuilds the recording from its scratch files the next time it launches.</p></div><div><h3>Disk-aware</h3><p>Shows how many hours of space you have left and warns you before it runs out.</p></div><div><h3>System audio only mode</h3><p>Record just a webinar or lecture with the microphone off.</p></div><div><h3>Local files</h3><p>Recordings are saved in your Movies folder and nothing is uploaded.</p></div></div>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Under the hood</h2><p class="sub">A native Swift app for Apple silicon and Intel Macs.</p>
+  <dl class="specs"><div><dt>Capture</dt><dd>ScreenCaptureKit + AVCapture</dd></div><div><dt>Format</dt><dd>AAC .m4a, 48 kHz</dd></div><div><dt>Files</dt><dd>3 tracks + metadata.json</dd></div><div><dt>Requires</dt><dd>macOS 14 Sonoma+</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Made for</h2><p class="sub">People whose meetings are worth keeping.</p>
+  <ul class="who"><li>Consultants</li><li>Coaches</li><li>Researchers &amp; interviewers</li><li>Podcasters on Zoom</li><li>Students</li><li>Sales teams</li></ul>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq"><details><summary>Does the other side know I&#x27;m recording?</summary><p>TwoTrack doesn&#x27;t notify anyone. Recording laws vary, so always tell participants and get their consent.</p></details><details><summary>Does it work with headphones?</summary><p>Yes. It captures the audio playing through your Mac, so headphones make no difference.</p></details><details><summary>Does it transcribe?</summary><p>Not yet. The separate tracks are made to work well with transcription tools like Whisper.</p></details></div>
+</div></section>
+<section class="band final" id="get"><div class="wrap"><div class="box">
+  <div>
+    <h2>Record your next call with TwoTrack</h2>
+    <p class="sub" style="margin:0">We&#x27;re signing up beta testers on macOS 14 and later. Email us to get a build.</p>
+    <div class="mailrow"><code>support@itbcn.com</code><button class="copy" type="button" data-copy="support@itbcn.com">Copy</button></div>
+  </div>
+  <div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>TwoTrack is made by TR1.eu in Barcelona.</span><span>Always get consent before recording a call.</span></div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}
+}));
+function sel(b){const c=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press ⌘C / Ctrl+C'}
+</script>
+
+</body>
+</html>

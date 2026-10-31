@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Live Call Translator</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Live Call Translator gives you real-time two-way voice translation on Mac phone and VoIP calls. You speak English and they hear French, with live subtitles both ways.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Lexend:wght@300;400;600&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: broadcast caption bars: yellow-on-black subtitle strips are the hero motif */
+:root{--bg:#f6f5f0;--fg:#121212;--muted:#55544e;--accent:#121212;--accent-ink:#7a5d00;--on-accent:#ffd400;--line:#dcdad1;--panel:#ffffff;--cap:#ffd400;--capbg:#111111}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0c0b;--fg:#f4f3ee;--muted:#a7a59c;--accent:#ffd400;--accent-ink:#ffd400;--on-accent:#0c0c0b;--line:#2a2a27;--panel:#161614;--cap:#ffd400;--capbg:#000000;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c0c0b;--fg:#f4f3ee;--muted:#a7a59c;--accent:#ffd400;--accent-ink:#ffd400;--on-accent:#0c0c0b;--line:#2a2a27;--panel:#161614;--cap:#ffd400;--capbg:#000000;color-scheme:dark}
+:root{--display:'Big Shoulders Display',Impact,sans-serif;--body:'Lexend',system-ui,sans-serif;--mono:'Roboto Mono',ui-monospace,monospace;--dw:900;--r:4px}
+
+:root{--gut:max(16px,env(safe-area-inset-left,0px));--gutr:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+header.top{padding-block:20px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.95rem}
+.platform{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+.hero{padding-block:40px 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.demo{overflow-x:clip;padding-block:8px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-family:var(--display);font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.02em;margin:.35em 0 .4em;text-wrap:balance;font-weight:var(--dw,700)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.btn{font:600 1rem var(--body);padding:13px 22px;border-radius:var(--r,10px);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--accent-ink);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:14px}
+.status b{color:var(--accent-ink);font-weight:600}
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 12px;text-wrap:balance;font-weight:var(--dw,700)}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:.85rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3,.feats h3{font-family:var(--display);font-size:1.15rem;margin:0;font-weight:var(--dw,700)}
+.steps p,.feats p{margin:0;color:var(--muted);font-size:.98rem}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feats>div{display:grid;gap:6px;align-content:start;padding-top:16px;border-top:2px solid var(--fg)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r,10px);overflow:hidden;background:var(--panel)}
+.specs div{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.specs dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.specs dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.who{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.who li{padding:8px 14px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:.95rem}
+.faq{display:grid;gap:0;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding-block:16px}
+.faq summary{font-weight:600;cursor:pointer;font-size:1.05rem}
+.faq p{color:var(--muted);margin:10px 0 0}
+.final{text-align:left}
+.final .box{background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r,10px)*1.6);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.final .box>*{min-width:0}
+.mailrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.mailrow code{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.copy{font:600 .9rem var(--body);padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+footer{padding-block:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.final .box{grid-template-columns:1fr;padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+.demo .screen{background:var(--capbg);border-radius:6px;padding:18px;display:grid;gap:14px}
+.demo .dir{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:#9a9a92;text-transform:uppercase}
+.demo .cap{background:#000;color:var(--cap);font-family:var(--body);font-weight:600;padding:8px 12px;font-size:1.02rem;line-height:1.4;border-left:4px solid var(--cap)}
+.demo .orig{color:#d7d6cf;font-weight:300;font-size:.92rem;padding:0 12px}
+.demo .lv{display:flex;gap:3px;height:16px;align-items:end;padding:0 12px}
+.demo .lv i{width:4px;background:var(--cap);border-radius:1px}
+
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="mark" aria-hidden="true">⇄</span>Live Call Translator</a>
+  <span class="platform">macOS</span>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">Real-time voice interpreter for calls</div>
+    <h1><span style="font-size:1.25em;text-transform:uppercase;letter-spacing:.01em">Talk to anyone.<br>In their language.</span></h1>
+    <p class="lede">Live Call Translator sits between you and your call app. Your voice reaches the other person in their language, and theirs reaches you in yours, with live subtitles in both directions.</p>
+    <div class="ctas"><a class="btn primary" href="#get">Become a design partner</a><a class="btn ghost" href="#how">How it works</a></div>
+    <div class="status"><b>Prototype</b> · looking for design partners</div>
+  </div>
+  <div class="demo" aria-hidden="true"><div class="screen"><div class="dir">You → Caller · EN → FR</div><div class="orig">Hi, I'm calling about the apartment on Rue Oberkampf.</div><div class="cap">Bonjour, j’appelle au sujet de l’appartement rue Oberkampf.</div>
+<div class="lv"><i style="height:40%"></i><i style="height:80%"></i><i style="height:55%"></i><i style="height:95%"></i><i style="height:35%"></i><i style="height:70%"></i></div>
+<div class="dir">Caller → You · FR → EN</div><div class="orig">Oui, il est toujours disponible à partir de décembre.</div><div class="cap">Yes, it's still available from December.</div></div></div>
+</div></section>
+<section class="band" id="how"><div class="wrap">
+  <h2>How a call works</h2><p class="sub">Two independent translation streams run at once, one for each direction.</p>
+  <ol class="steps"><li><h3>Pick your languages</h3><p>The source language is detected automatically. You choose the target for each direction.</p></li><li><h3>Start both directions</h3><p>Your microphone goes out translated and the caller&#x27;s voice comes back translated to your headphones.</p></li><li><h3>Call as usual</h3><p>Works with Zoiper and other softphones, plus WhatsApp desktop with a simple audio setup.</p></li><li><h3>Read along</h3><p>Original and translated subtitles scroll live, so you can catch anything you missed.</p></li></ol>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Translation that keeps up with the conversation</h2><p class="sub">It&#x27;s built for calls where you can&#x27;t wait for a text translator to catch up.</p>
+  <div class="feats"><div><h3>Voice in, voice out</h3><p>Neither side has to read anything. You both just talk.</p></div><div><h3>Both directions at once</h3><p>Each direction runs on its own, so a hiccup on one side doesn&#x27;t stop the other.</p></div><div><h3>Live subtitles</h3><p>See what was said and how it was translated, as it happens.</p></div><div><h3>Restores your audio</h3><p>Your Mac&#x27;s audio devices go back to how they were when you stop.</p></div><div><h3>Bring your own key</h3><p>Uses your OpenAI realtime translation key. You pay only for the minutes you use.</p></div><div><h3>Practice mode</h3><p>Test each direction with built-in sample audio before a real call.</p></div></div>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Under the hood</h2><p class="sub">A Python prototype, with a native Swift app in progress.</p>
+  <dl class="specs"><div><dt>Engine</dt><dd>OpenAI realtime translate</dd></div><div><dt>Directions</dt><dd>2, independent</dd></div><div><dt>Call apps</dt><dd>Zoiper, softphones, WhatsApp desktop</dd></div><div><dt>Platform</dt><dd>macOS</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Made for</h2><p class="sub">People who need to talk with someone they share no language with.</p>
+  <ul class="who"><li>Expats calling landlords &amp; doctors</li><li>Sales across borders</li><li>Small importers</li><li>Relocation agents</li><li>Family calls</li></ul>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq"><details><summary>Does the other person need to install anything?</summary><p>No. They hear a normal voice call in their own language.</p></details><details><summary>How much latency is there?</summary><p>Typically one to two seconds, a little slower than a human interpreter.</p></details><details><summary>Is setup hard?</summary><p>The current prototype needs two virtual audio devices. The native Mac app is being built to remove that step.</p></details></div>
+</div></section>
+<section class="band final" id="get"><div class="wrap"><div class="box">
+  <div>
+    <h2>Have calls you can&#x27;t take today?</h2>
+    <p class="sub" style="margin:0">We&#x27;re looking for a few people who make cross-language calls every week to shape the first release. Email:</p>
+    <div class="mailrow"><code>support@itbcn.com</code><button class="copy" type="button" data-copy="support@itbcn.com">Copy</button></div>
+  </div>
+  <div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>Live Call Translator is made by TR1.eu in Barcelona.</span><span>Always tell the other party that the call is being translated.</span></div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}
+}));
+function sel(b){const c=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press ⌘C / Ctrl+C'}
+</script>
+
+</body>
+</html>

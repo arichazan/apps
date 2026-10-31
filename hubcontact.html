@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>HubContact</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="HubContact shows the HubSpot contact and Stripe subscription for the person you&#x27;re emailing in Gmail or chatting with on WhatsApp in Bird Inbox. Includes click-to-call.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an inbox mock with the context strip injected under the subject line */
+:root{--bg:#f6f7f9;--fg:#1b2230;--muted:#596377;--accent:#e8590c;--accent-ink:#c2470a;--on-accent:#ffffff;--line:#dfe3ea;--panel:#ffffff;--ok:#1f9254;--soft:#fff1e8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151c;--fg:#edf0f5;--muted:#9fa9bb;--accent:#ff8a4c;--accent-ink:#ffa575;--on-accent:#11151c;--line:#283041;--panel:#171c25;--ok:#4bc982;--soft:#2a1d15;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11151c;--fg:#edf0f5;--muted:#9fa9bb;--accent:#ff8a4c;--accent-ink:#ffa575;--on-accent:#11151c;--line:#283041;--panel:#171c25;--ok:#4bc982;--soft:#2a1d15;color-scheme:dark}
+:root{--display:'Plus Jakarta Sans',system-ui,sans-serif;--body:'Plus Jakarta Sans',system-ui,sans-serif;--mono:'DM Mono',ui-monospace,monospace;--dw:800}
+
+:root{--gut:max(16px,env(safe-area-inset-left,0px));--gutr:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+header.top{padding-block:20px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.95rem}
+.platform{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+.hero{padding-block:40px 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.demo{overflow-x:clip;padding-block:8px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-family:var(--display);font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.02em;margin:.35em 0 .4em;text-wrap:balance;font-weight:var(--dw,700)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.btn{font:600 1rem var(--body);padding:13px 22px;border-radius:var(--r,10px);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--accent-ink);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:14px}
+.status b{color:var(--accent-ink);font-weight:600}
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 12px;text-wrap:balance;font-weight:var(--dw,700)}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:.85rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3,.feats h3{font-family:var(--display);font-size:1.15rem;margin:0;font-weight:var(--dw,700)}
+.steps p,.feats p{margin:0;color:var(--muted);font-size:.98rem}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feats>div{display:grid;gap:6px;align-content:start;padding-top:16px;border-top:2px solid var(--fg)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r,10px);overflow:hidden;background:var(--panel)}
+.specs div{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.specs dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.specs dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.who{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.who li{padding:8px 14px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:.95rem}
+.faq{display:grid;gap:0;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding-block:16px}
+.faq summary{font-weight:600;cursor:pointer;font-size:1.05rem}
+.faq p{color:var(--muted);margin:10px 0 0}
+.final{text-align:left}
+.final .box{background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r,10px)*1.6);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.final .box>*{min-width:0}
+.mailrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.mailrow code{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.copy{font:600 .9rem var(--body);padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+footer{padding-block:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.final .box{grid-template-columns:1fr;padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+.demo .mail{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.demo .subj{padding:16px 18px 10px;font-weight:700;font-size:1.05rem}
+.demo .strip{margin:0 18px;padding:10px 12px;border-radius:8px;background:var(--soft);border:1px solid var(--line);display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:.85rem}
+.demo .av{width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:700;font-size:.8rem}
+.demo .pill{font-family:var(--mono);font-size:.75rem;padding:3px 8px;border-radius:99px;border:1px solid currentColor}
+.demo .ok{color:var(--ok)}
+.demo .body{padding:16px 18px;color:var(--muted);font-size:.92rem;display:grid;gap:8px}
+.demo .body i{display:block;height:8px;border-radius:4px;background:var(--line)}
+
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="mark" aria-hidden="true">H</span>HubContact</a>
+  <span class="platform">Chrome extension</span>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">CRM context inside your inbox</div>
+    <h1>Know who’s writing before you reply.</h1>
+    <p class="lede">Open an email in Gmail or a WhatsApp chat in Bird Inbox and HubContact shows that person&#x27;s HubSpot record and Stripe subscription right next to it. Their phone number is one click away.</p>
+    <div class="ctas"><a class="btn primary" href="#get">Join the pilot</a><a class="btn ghost" href="#how">How it works</a></div>
+    <div class="status"><b>Pilot</b> · v0.2 · looking for 10 teams</div>
+  </div>
+  <div class="demo" aria-hidden="true"><div class="mail"><div class="subj">Re: Can we add two more seats?</div>
+<div class="strip"><span class="av">LM</span><span><b>Laura Méndez</b> · Lifecycle: Customer · Owner: Ari</span><span class="pill ok">Stripe: active · Team plan</span><span class="pill" style="color:var(--accent-ink)">📞 +34 612 ···</span></div>
+<div class="body"><i style="width:90%"></i><i style="width:75%"></i><i style="width:60%"></i></div></div></div>
+</div></section>
+<section class="band" id="how"><div class="wrap">
+  <h2>Add two keys, then just read your email</h2><p class="sub">HubContact matches people by email address and phone number, including numbers it finds in the message text.</p>
+  <ol class="steps"><li><h3>Add your HubSpot key</h3><p>A read-only key for contacts, plus your portal ID so links open the right account.</p></li><li><h3>Add Stripe if you want</h3><p>A restricted read key shows plan, trial and cancellation status.</p></li><li><h3>Open a conversation</h3><p>The contact card appears under the subject line in Gmail or beside the chat in Bird Inbox.</p></li></ol>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Everything you&#x27;d otherwise check in another tab</h2><p class="sub">Sales and support teams switch between their inbox, the CRM and Stripe dozens of times an hour. HubContact puts that information in one place.</p>
+  <div class="feats"><div><h3>Gmail and WhatsApp</h3><p>Works in Gmail threads and in Bird (MessageBird) Inbox WhatsApp conversations.</p></div><div><h3>Billing status at a glance</h3><p>See whether someone is subscribed, trialing or about to cancel, and which plan they&#x27;re on.</p></div><div><h3>Click to call</h3><p>Phone numbers become call links, in the card and in HubSpot&#x27;s own phone fields.</p></div><div><h3>Smart matching</h3><p>Finds the customer in reply-to lines, form notifications, wa.me links and phone numbers in the text.</p></div><div><h3>Stripe links in ActiveCampaign</h3><p>Every email in your ActiveCampaign contact list gets a direct link to that customer in Stripe.</p></div><div><h3>Read-only</h3><p>HubContact only reads. It never edits your CRM or billing data.</p></div></div>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Under the hood</h2><p class="sub">Keys are stored in your browser and requests go directly to the HubSpot and Stripe APIs.</p>
+  <dl class="specs"><div><dt>Works in</dt><dd>Gmail · Bird Inbox · ActiveCampaign · HubSpot</dd></div><div><dt>Data sources</dt><dd>HubSpot CRM, Stripe</dd></div><div><dt>Access</dt><dd>Read-only keys</dd></div><div><dt>Servers in between</dt><dd>None</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Made for</h2><p class="sub">Small teams that sell and support customers on HubSpot and Stripe.</p>
+  <ul class="who"><li>SaaS support teams</li><li>Customer success</li><li>Founders doing sales</li><li>WhatsApp-first businesses</li><li>Agencies</li></ul>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq"><details><summary>Do I need a HubSpot paid plan?</summary><p>No. Any HubSpot account that can create a private app key with read access to contacts will work.</p></details><details><summary>Is a one-click “Connect HubSpot” coming?</summary><p>Yes. OAuth sign-in is next on the roadmap and will replace pasting keys.</p></details><details><summary>Can it write notes back to HubSpot?</summary><p>Not yet. Tell us if you need it.</p></details></div>
+</div></section>
+<section class="band final" id="get"><div class="wrap"><div class="box">
+  <div>
+    <h2>Try it with your team</h2>
+    <p class="sub" style="margin:0">We&#x27;re onboarding a small group of HubSpot + Stripe teams for free during the pilot. Email us:</p>
+    <div class="mailrow"><code>support@itbcn.com</code><button class="copy" type="button" data-copy="support@itbcn.com">Copy</button></div>
+  </div>
+  <div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>HubContact is made by TR1.eu in Barcelona.</span><span>HubSpot and Stripe are trademarks of their owners. HubContact isn't affiliated with either.</span></div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}
+}));
+function sel(b){const c=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press ⌘C / Ctrl+C'}
+</script>
+
+</body>
+</html>

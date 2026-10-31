@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>TabLabler</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="TabLabler adds a big DEV, STAGE or PROD badge to any browser tab, so you never run the wrong query on production again.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,400;75..112.5,700;75..112.5,800&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: three browser tabs labelled by environment; traffic-light semantics carry the color */
+:root{--bg:#f5f5f3;--fg:#1d1d1b;--muted:#5f5f5a;--accent:#2557d6;--accent-ink:#1d46b0;--on-accent:#ffffff;--line:#dadad5;--panel:#ffffff;--dev:#2557d6;--stage:#c98a00;--prod:#d1342f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--fg:#efefea;--muted:#a3a39d;--accent:#6f97ff;--accent-ink:#93b1ff;--on-accent:#121212;--line:#2b2b29;--panel:#1a1a19;--dev:#6f97ff;--stage:#f2b43a;--prod:#ff6b63;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121212;--fg:#efefea;--muted:#a3a39d;--accent:#6f97ff;--accent-ink:#93b1ff;--on-accent:#121212;--line:#2b2b29;--panel:#1a1a19;--dev:#6f97ff;--stage:#f2b43a;--prod:#ff6b63;color-scheme:dark}
+:root{--display:'Martian Mono',ui-monospace,monospace;--body:'Work Sans',system-ui,sans-serif;--mono:'Martian Mono',ui-monospace,monospace;--r:6px;--dw:800}
+
+:root{--gut:max(16px,env(safe-area-inset-left,0px));--gutr:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+header.top{padding-block:20px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:.95rem}
+.platform{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+.hero{padding-block:40px 64px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero .wrap>*{min-width:0}
+.demo{overflow-x:clip;padding-block:8px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font-family:var(--display);font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.02em;margin:.35em 0 .4em;text-wrap:balance;font-weight:var(--dw,700)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:34em;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.btn{font:600 1rem var(--body);padding:13px 22px;border-radius:var(--r,10px);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border-color:var(--line);color:var(--fg);background:transparent}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--accent-ink);outline-offset:2px}
+.status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:14px}
+.status b{color:var(--accent-ink);font-weight:600}
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+h2{font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 12px;text-wrap:balance;font-weight:var(--dw,700)}
+.sub{color:var(--muted);max-width:40em;margin:0 0 36px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:.85rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3,.feats h3{font-family:var(--display);font-size:1.15rem;margin:0;font-weight:var(--dw,700)}
+.steps p,.feats p{margin:0;color:var(--muted);font-size:.98rem}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 40px}
+.feats>div{display:grid;gap:6px;align-content:start;padding-top:16px;border-top:2px solid var(--fg)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:var(--r,10px);overflow:hidden;background:var(--panel)}
+.specs div{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.specs dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.specs dd{margin:4px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.who{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.who li{padding:8px 14px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:.95rem}
+.faq{display:grid;gap:0;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding-block:16px}
+.faq summary{font-weight:600;cursor:pointer;font-size:1.05rem}
+.faq p{color:var(--muted);margin:10px 0 0}
+.final{text-align:left}
+.final .box{background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r,10px)*1.6);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.final .box>*{min-width:0}
+.mailrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.mailrow code{font-family:var(--mono);background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.copy{font:600 .9rem var(--body);padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+footer{padding-block:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.final .box{grid-template-columns:1fr;padding:24px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+.demo .tabs{display:flex;gap:4px;align-items:flex-end;overflow:hidden}
+.demo .tab{flex:1;min-width:0;background:var(--line);border-radius:8px 8px 0 0;padding:8px 10px;font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.demo .tab.on{background:var(--panel);color:var(--fg)}
+.demo .win{background:var(--panel);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;height:220px;position:relative;padding:20px;display:grid;gap:10px;align-content:start}
+.demo .win i{display:block;height:10px;border-radius:5px;background:var(--line)}
+.demo .badge{position:absolute;right:18px;top:18px;font-family:var(--mono);font-weight:800;font-size:1.2rem;color:#fff;background:var(--prod);padding:8px 14px;border-radius:6px;box-shadow:0 8px 24px -8px var(--prod);cursor:grab}
+.demo .t-dev{color:var(--dev);font-weight:700}.demo .t-stage{color:var(--stage);font-weight:700}.demo .t-prod{color:var(--prod);font-weight:700}
+
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="mark" aria-hidden="true">#</span>TabLabler</a>
+  <span class="platform">Chrome extension</span>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">For developers and ops</div>
+    <h1>Is this tab <span style="color:var(--prod)">prod</span>?</h1>
+    <p class="lede">Label any tab DEV, STAGE, PROD or anything you like. TabLabler adds the label to the tab title and pins a draggable badge on the page, so you always know which environment you&#x27;re in.</p>
+    <div class="ctas"><a class="btn primary" href="#get">Get notified</a><a class="btn ghost" href="#how">How it works</a></div>
+    <div class="status"><b>Free</b> · coming to the Chrome Web Store</div>
+  </div>
+  <div class="demo" aria-hidden="true"><div class="tabs"><div class="tab"><span class="t-dev">DEV</span> Admin · localhost</div><div class="tab"><span class="t-stage">STAGE</span> Admin · staging</div><div class="tab on"><span class="t-prod">PROD</span> Admin · app.example.com</div></div>
+<div class="win"><i style="width:40%;height:14px"></i><i style="width:85%"></i><i style="width:70%"></i><i style="width:78%"></i><span class="badge">PROD</span></div></div>
+</div></section>
+<section class="band" id="how"><div class="wrap">
+  <h2>Two clicks per tab</h2><p class="sub">Labels belong to a tab, so a label you set on one tab never shows up on another.</p>
+  <ol class="steps"><li><h3>Click the toolbar icon</h3><p>Type a label such as DEV, STAGE, PROD or CLIENT-A.</p></li><li><h3>See it everywhere</h3><p>The tab title starts with your label and a colored badge floats on the page.</p></li><li><h3>Drag it out of the way</h3><p>Move the badge anywhere. Its position is remembered for that tab.</p></li></ol>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Small tool, fewer accidents</h2><p class="sub">It&#x27;s the browser version of a red sticker on the production server.</p>
+  <div class="feats"><div><h3>Survives reloads</h3><p>The label stays through refreshes and navigation within the same tab.</p></div><div><h3>Stays in its tab</h3><p>Closing or duplicating the tab clears the label, so it never leaks to other pages.</p></div><div><h3>Your color</h3><p>Set a preferred badge color once from the icon&#x27;s right-click menu.</p></div><div><h3>Title prefix</h3><p>Labels show in the tab strip, in the window switcher and in your history.</p></div><div><h3>No setup</h3><p>No account and no domain rules. Label the tab you&#x27;re on.</p></div><div><h3>Private</h3><p>Nothing is synced or sent anywhere. Labels live in the browser session.</p></div></div>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Under the hood</h2><p class="sub">A very small Manifest V3 extension.</p>
+  <dl class="specs"><div><dt>Manifest</dt><dd>V3</dd></div><div><dt>Storage</dt><dd>chrome.storage.session</dd></div><div><dt>Network calls</dt><dd>None</dd></div><div><dt>Price</dt><dd>Free</dd></div></dl>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Made for</h2><p class="sub">Anyone with too many identical-looking admin panels.</p>
+  <ul class="who"><li>Backend developers</li><li>DevOps &amp; SRE</li><li>QA engineers</li><li>Agencies with many client sites</li><li>Support with multiple accounts</li></ul>
+</div></section>
+<section class="band"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq"><details><summary>Can it label tabs automatically by URL?</summary><p>Not yet. Automatic rules by domain are the most requested feature and are next on the list.</p></details><details><summary>Does it work in every frame?</summary><p>The badge shows in the top-level page and stays above the site&#x27;s own UI.</p></details><details><summary>Why does it need access to all sites?</summary><p>So you can label a tab on any domain you choose. It doesn&#x27;t read or send page content.</p></details></div>
+</div></section>
+<section class="band final" id="get"><div class="wrap"><div class="box">
+  <div>
+    <h2>Put a label on prod</h2>
+    <p class="sub" style="margin:0">TabLabler is free. Email us to get the Chrome Web Store link when it goes live.</p>
+    <div class="mailrow"><code>support@itbcn.com</code><button class="copy" type="button" data-copy="support@itbcn.com">Copy</button></div>
+  </div>
+  <div></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>TabLabler is made by TR1.eu in Barcelona.</span><span>Free. No tracking.</span></div></footer>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}
+}));
+function sel(b){const c=b.previousElementSibling;const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press ⌘C / Ctrl+C'}
+</script>
+
+</body>
+</html>
